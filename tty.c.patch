@@ -1,0 +1,29 @@
+--- tty.c	2001-01-21 03:10:22.000000000 +0900
++++ tty.c	2016-01-21 11:17:56.000000000 +0900
+@@ -281,7 +281,7 @@
+ 	if (row == bot) {		/* Case of one line insert is	*/
+ 		ttmove(row, 0);		/*	special			*/
+ 		tteeol();
+-		return;
++		return 255;
+ 	}
+ 	if (CS && SR) {		/* Use scroll region and back index	*/
+ 		nl = bot - row;
+@@ -289,7 +289,7 @@
+ 		ttmove(row, 0);
+ 		while (nchunk--) putpad(SR, nl);
+ 		ttnowindow();
+-		return;
++		return 255;
+ 	} else if (insdel) {
+ 		ttmove(1+bot-nchunk, 0);
+ 		nl = nrow - ttrow;
+@@ -321,7 +321,7 @@
+ 	if (row == bot) {		/* One line special case	*/
+ 		ttmove(row, 0);
+ 		tteeol();
+-		return;
++		return 255;
+ 	}
+ 	if (CS) {			/* scrolling region	*/
+ 		nl = bot - row;
